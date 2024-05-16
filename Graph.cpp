@@ -1,7 +1,3 @@
-//
-// Created by edumr on 16/05/2024.
-//
-
 #include "Graph.h"
 
 //class Node
@@ -79,15 +75,31 @@ Edge * Node::addEdge(Node *dest, double w){
     return edge;
 }
 
-bool Node::removeEdge(int index){
+bool Node::removeEdge(int id){
     for (int i = 0; i < this->adj.size(); i++){
-        if (this->adj[i]->getDest()->getIndex() == index){
+        if (this->adj[i]->getDest()->getIndex() == id){
             this->adj.erase(this->adj.begin() + i);
             return true;
         }
     }
     return false;
 }
+
+void Node::deleteEdge(Edge *edge) {
+    Node *dest = edge->getDest();
+    // Remove the corresponding edge from the incoming list
+    auto it = dest->incoming.begin();
+    while (it != dest->incoming.end()) {
+        if ((*it)->getOrig()->getIndex() == this->index) {
+            it = dest->incoming.erase(it);
+        }
+        else {
+            it++;
+        }
+    }
+    delete edge;
+}
+
 
 void Node::removeOutgoingEdges(){
     for (int i = 0; i < this->adj.size(); i++){

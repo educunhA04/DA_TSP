@@ -32,7 +32,8 @@ class Node {
         void setDist(double dist);
         void setPath(Edge *path);
         Edge * addEdge(Node *dest, double w);
-        bool removeEdge(int index);
+        bool removeEdge(int id);
+        void deleteEdge(Edge *edge);
         void removeOutgoingEdges();
 
     private:
