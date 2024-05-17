@@ -1,9 +1,7 @@
 #include "Menu.h"
 
 #include <iostream>
-Menu::Menu(){
-    init();
-}
+Menu::Menu(GraphInterface graph): graph(graph){};
 
 void Menu::init() {
     string inp;

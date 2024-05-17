@@ -3,6 +3,8 @@
 #include "Parser.h"
 
 class Menu {
+    protected:
+        GraphInterface graph;
     private:
         void chooseTypeofGraph();
         void realWorldGraphMenu();
@@ -11,7 +13,7 @@ class Menu {
 
 
     public:
-    explicit Menu();
+    explicit Menu(GraphInterface graph);
     void init();
         static void end();
 };
