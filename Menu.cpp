@@ -1,8 +1,10 @@
 #include "Menu.h"
+
 #include <iostream>
-Menu::Menu() {
+Menu::Menu(){
     init();
 }
+
 void Menu::init() {
     string inp;
     while (true) {
@@ -20,13 +22,13 @@ void Menu::init() {
         cin >> inp;
 
         if (inp == "1") {
-            //chooseTypeofGraph("Backtracking");
+            chooseTypeofGraph();
         }
         else if (inp == "2") {
-            //chooseTypeofGraph("Triangular");
+            chooseTypeofGraph();
         }
         else if (inp == "3") {
-            //chooseTypeofGraph("Other");
+            chooseTypeofGraph();
         }
 
         else if (inp == "e" || inp == "E") {
@@ -44,7 +46,7 @@ void Menu::init() {
 
 
 // Choose graph type
-void Menu::chooseTypeofGraph(const std::string &algorithm) {
+void Menu::chooseTypeofGraph() {
     string inp;
     while (true) {
         cout <<"###################################" << "\n"
@@ -61,13 +63,13 @@ void Menu::chooseTypeofGraph(const std::string &algorithm) {
         cin >> inp;
 
         if (inp == "1") {
-            //chooseTypeofGraph("Backtracking");
+            toyGraphMenu();
         }
         else if (inp == "2") {
-            //chooseTypeofGraph("Triangular");
+            realWorldGraphMenu();
         }
         else if (inp == "3") {
-            //chooseTypeofGraph("Other");
+            extraGraphMenu();
         }
 
         else if (inp == "e" || inp == "E") {
@@ -83,6 +85,45 @@ void Menu::chooseTypeofGraph(const std::string &algorithm) {
     }
 }
 
+
+void Menu::realWorldGraphMenu() {
+    string inp;
+    while (true) {
+        cout <<"###################################" << "\n"
+             <<"#     Select an algorithm:        #" << "\n"
+             <<"#---------------------------------#" << "\n"
+             <<"#   1 -> graph1                   #" << "\n"
+             <<"#   2 -> graph2                   #" << "\n"
+             <<"#   3 -> graph3                   #" << "\n"
+             <<"#   E -> EXIT                     #" << "\n"
+             <<"#                                 #" << "\n"
+             <<"###################################" << "\n"
+             <<"Option: "<<endl;
+
+        cin >> inp;
+
+        if (inp == "1") {
+
+        }
+        else if (inp == "2") {
+            realWorldGraph("../data_sets/Real-world Graphs/graph1/nodes.csv", "../data_sets/Real-world Graphs/graph1/edges.csv");
+        }
+        else if (inp == "3") {
+            extraGraph();
+        }
+
+        else if (inp == "e" || inp == "E") {
+            end();
+            exit(0);
+        }
+
+        else {
+            cout << "Insert a valid input!" << endl;
+            cin.clear();
+            init();
+        }
+    }
+}
 
 void Menu::end() {
     cout <<"###################################" << "\n"

@@ -13,4 +13,5 @@ add_executable(DA_TSP main.cpp
         GraphInterface.cpp
         GraphInterface.h
         Parser.cpp
-        Parser.h)
+        Parser.h
+        GraphInterface.cpp)
