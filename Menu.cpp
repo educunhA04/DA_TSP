@@ -50,7 +50,7 @@ void Menu::chooseTypeofGraph() {
     string inp;
     while (true) {
         cout <<"###################################" << "\n"
-             <<"#     Select an algorithm:        #" << "\n"
+             <<"#     Select an option:           #" << "\n"
              <<"#---------------------------------#" << "\n"
              <<"#   1 -> Toy Graph                #" << "\n"
              <<"#   2 -> Real World Graph         #" << "\n"
@@ -90,7 +90,7 @@ void Menu::realWorldGraphMenu() {
     string inp;
     while (true) {
         cout <<"###################################" << "\n"
-             <<"#     Select an algorithm:        #" << "\n"
+             <<"#     Select an option:           #" << "\n"
              <<"#---------------------------------#" << "\n"
              <<"#   1 -> graph1                   #" << "\n"
              <<"#   2 -> graph2                   #" << "\n"
@@ -103,13 +103,13 @@ void Menu::realWorldGraphMenu() {
         cin >> inp;
 
         if (inp == "1") {
-
+            realWorldGraph("../data/Real-world Graphs/graph1/nodes.csv", "../data/Real-world Graphs/graph1/edges.csv");
         }
         else if (inp == "2") {
-            realWorldGraph("../data_sets/Real-world Graphs/graph1/nodes.csv", "../data_sets/Real-world Graphs/graph1/edges.csv");
+            realWorldGraph("../data/Real-world Graphs/graph2/nodes.csv", "../data/Real-world Graphs/graph2/edges.csv");
         }
         else if (inp == "3") {
-            extraGraph();
+            realWorldGraph("../data/Real-world Graphs/graph3/nodes.csv", "../data/Real-world Graphs/graph3/edges.csv");
         }
 
         else if (inp == "e" || inp == "E") {
@@ -121,6 +121,78 @@ void Menu::realWorldGraphMenu() {
             cout << "Insert a valid input!" << endl;
             cin.clear();
             init();
+        }
+    }
+}
+
+void Menu::toyGraphMenu() {
+    string inp;
+    while (true) {
+        cout <<"###################################" << "\n"
+             <<"#     Select an option:           #" << "\n"
+             <<"#---------------------------------#" << "\n"
+             <<"#   1 -> shipping                 #" << "\n"
+             <<"#   2 -> stadiums                 #" << "\n"
+             <<"#   3 -> tourism                  #" << "\n"
+             <<"#   E -> EXIT                     #" << "\n"
+             <<"#                                 #" << "\n"
+             <<"###################################" << "\n"
+             <<"Option: "<<endl;
+
+        cin >> inp;
+
+        if (inp == "1") {
+            toyGraph("../data/Toy-graphs/shipping.csv");
+        }
+        else if (inp == "2") {
+            toyGraph("../data/Toy-graphs/stadiums.csv");
+        }
+        else if (inp == "3") {
+            toyGraph("../data/Toy-graphs/tourism.csv");
+        }
+
+        else if (inp == "e" || inp == "E") {
+            end();
+            exit(0);
+        }
+
+        else {
+            cout << "Insert a valid input!" << endl;
+            cin.clear();
+            init();
+        }
+    }
+}
+
+void Menu::extraGraphMenu() {
+    string inp;
+    while (true) {
+        cout <<"#####################################" << "\n"
+             <<"#     Insert one of the values:     #" << "\n"
+             <<"#-----------------------------------#" << "\n"
+             <<"#   25 |  50  |  75  |  100  |  200 #" << "\n"
+             <<"#  300 | 400  | 500  |  600  |  700 #" << "\n"
+             <<"#            800 | 900              #" << "\n"
+             <<"#                                   #" << "\n"
+             <<"#####################################" << "\n"
+             <<"Option: "<<endl;
+
+        cin >> inp;
+
+        if (inp != "25" || inp != "50" ||inp != "75" ||inp != "100" ||inp != "200" ||inp != "300" ||inp != "400" ||inp != "500" ||inp != "600" ||inp != "700" ||inp != "800" ||inp != "900") {
+            cout << "Insert a valid input!" << endl;
+            cin.clear();
+            extraGraphMenu();
+        }
+
+        else if (inp == "e" || inp == "E") {
+            end();
+            exit(0);
+        }
+
+        else {
+            extraGraph("../data_sets/Extra_Fully_Connected_Graphs/edges_" + inp + ".csv");
+
         }
     }
 }
