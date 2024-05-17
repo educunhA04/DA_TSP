@@ -4,13 +4,6 @@
 
 class GraphInterface {
     public:
-        //Parser
-        int realWorldGraph(const string& nodesFile, const string& edgesFile);
-
-        int extraGraph(const string& edgesFile);
-
-        int toyGraph(const string& filepath);
-
         //Graph Operations
         Node *findNode(int index);
         bool addNode(const int &index, double latitude = 0, double longitude = 0);
@@ -19,11 +12,9 @@ class GraphInterface {
         vector<Node *> getNodes();
         void clearAllNodes();
 
-
         //Algorithms
     private:
         std::vector<Node*> nodes;
-
 };
 
 

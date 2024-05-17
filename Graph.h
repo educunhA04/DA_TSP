@@ -63,7 +63,7 @@ class Edge {
         void setReverse(Edge *reverse);
 
     private:
-        Node * dest; // destination vertex
+        Node *dest; // destination vertex
         double weight; // edge weight, can also be used for capacity
 
         // auxiliary fields
