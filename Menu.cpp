@@ -177,20 +177,18 @@ void Menu::extraGraphMenu() {
 
         cin >> inp;
 
-        if (inp != "25" || inp != "50" ||inp != "75" ||inp != "100" ||inp != "200" ||inp != "300" ||inp != "400" ||inp != "500" ||inp != "600" ||inp != "700" ||inp != "800" ||inp != "900") {
-            cout << "Insert a valid input!" << endl;
-            cin.clear();
-            extraGraphMenu();
+        if (inp == "25" || inp == "50" || inp == "75" || inp == "100" ||
+            inp == "200" || inp == "300" || inp == "400" || inp == "500" ||
+            inp == "600" || inp == "700" || inp == "800" || inp == "900") {
+            extraGraph("../data_to_test/Extra_Fully_Connected_Graphs/edges_" + inp + ".csv");
         }
-
         else if (inp == "e" || inp == "E") {
             end();
             exit(0);
         }
-
         else {
-            extraGraph("../data_sets/Extra_Fully_Connected_Graphs/edges_" + inp + ".csv");
-
+            cout << "Insert a valid input!" << endl;
+            cin.clear();
         }
     }
 }
