@@ -1,4 +1,6 @@
 #include "GraphInterface.h"
+
+
 Node *GraphInterface::findNode(int index){
     for (auto v : getNodes()) {
         if (v->getIndex() == index) {

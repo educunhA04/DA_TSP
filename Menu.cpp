@@ -101,13 +101,13 @@ void Menu::realWorldGraphMenu() {
         cin >> inp;
 
         if (inp == "1") {
-            realWorldGraph("../data/Real-world Graphs/graph1/nodes.csv", "../data/Real-world Graphs/graph1/edges.csv");
+            realWorldGraph("../data_to_test/Real-world Graphs/graph1/nodes.csv", "../data_to_test/Real-world Graphs/graph1/edges.csv");
         }
         else if (inp == "2") {
-            realWorldGraph("../data/Real-world Graphs/graph2/nodes.csv", "../data/Real-world Graphs/graph2/edges.csv");
+            realWorldGraph("../data_to_test/Real-world Graphs/graph2/nodes.csv", "../data_to_test/Real-world Graphs/graph2/edges.csv");
         }
         else if (inp == "3") {
-            realWorldGraph("../data/Real-world Graphs/graph3/nodes.csv", "../data/Real-world Graphs/graph3/edges.csv");
+            realWorldGraph("../data_to_test/Real-world Graphs/graph3/nodes.csv", "../data_to_test/Real-world Graphs/graph3/edges.csv");
         }
 
         else if (inp == "e" || inp == "E") {
@@ -140,13 +140,13 @@ void Menu::toyGraphMenu() {
         cin >> inp;
 
         if (inp == "1") {
-            toyGraph("../data/Toy-graphs/shipping.csv");
+            toyGraph("../data_to_test/Toy-graphs/shipping.csv");
         }
         else if (inp == "2") {
-            toyGraph("../data/Toy-graphs/stadiums.csv");
+            toyGraph("../data_to_test/Toy-graphs/stadiums.csv");
         }
         else if (inp == "3") {
-            toyGraph("../data/Toy-graphs/tourism.csv");
+            toyGraph("../data_to_test/Toy-graphs/tourism.csv");
         }
 
         else if (inp == "e" || inp == "E") {

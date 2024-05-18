@@ -1,7 +1,9 @@
 #include <iostream>
 #include "Menu.h"
+
 int main() {
-    Menu menu;
+    GraphInterface graph;
+    Menu menu(graph);
     menu.init();
     menu.end();
     return 0;

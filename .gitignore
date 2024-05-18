@@ -33,4 +33,4 @@ lib/
 *.exe
 *.pdb
 *.ilk
-/data/
+/data_to_test/
