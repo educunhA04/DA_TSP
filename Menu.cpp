@@ -105,18 +105,15 @@ void Menu::realWorldGraphMenu() {
         cin >> inp;
 
         if (inp == "1") {
-            finalGraph->clearAllNodes();
-            realWorldGraph("../data_to_test/Real-world Graphs/graph1/nodes.csv", "../data_to_test/Real-world Graphs/graph1/edges.csv");
+            realWorldGraph("../data_to_test/Real-world Graphs/graph1/nodes.csv", "/data_to_test/Real-world Graphs/graph1/edges.csv");
             chooseAlgorithm();
         }
         else if (inp == "2") {
-            finalGraph->clearAllNodes();
-            realWorldGraph("../data_to_test/Real-world Graphs/graph2/nodes.csv", "../data_to_test/Real-world Graphs/graph2/edges.csv");
+            realWorldGraph("../data_to_test/Real-world Graphs/graph2/nodes.csv", "/data_to_test/Real-world Graphs/graph2/edges.csv");
             chooseAlgorithm();
         }
         else if (inp == "3") {
-            finalGraph->clearAllNodes();
-            realWorldGraph("../data_to_test/Real-world Graphs/graph3/nodes.csv", "../data_to_test/Real-world Graphs/graph3/edges.csv");
+            realWorldGraph("../data_to_test/Real-world Graphs/graph3/nodes.csv", "/data_to_test/Real-world Graphs/graph3/edges.csv");
             chooseAlgorithm();
         }
         else if (inp == "e" || inp == "E") {
@@ -149,17 +146,14 @@ void Menu::toyGraphMenu() {
         cin >> inp;
 
         if (inp == "1") {
-            finalGraph->clearAllNodes();
             toyGraph("../data_to_test/Toy-graphs/shipping.csv");
             chooseAlgorithm();
         }
         else if (inp == "2") {
-            finalGraph->clearAllNodes();
             toyGraph("../data_to_test/Toy-graphs/stadiums.csv");
             chooseAlgorithm();
         }
         else if (inp == "3") {
-            finalGraph->clearAllNodes();
             toyGraph("../data_to_test/Toy-graphs/tourism.csv");
             chooseAlgorithm();
         }
@@ -195,7 +189,6 @@ void Menu::extraGraphMenu() {
         if (inp == "25" || inp == "50" || inp == "75" || inp == "100" ||
             inp == "200" || inp == "300" || inp == "400" || inp == "500" ||
             inp == "600" || inp == "700" || inp == "800" || inp == "900") {
-            finalGraph->clearAllNodes();
             extraGraph("../data_to_test/Extra_Fully_Connected_Graphs/edges_" + inp + ".csv");
             chooseAlgorithm();
         }
