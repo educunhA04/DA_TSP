@@ -50,6 +50,7 @@ void Menu::chooseAlgorithm() {
                   << "#   1 -> Backtracking Algorithm   #" << "\n"
                   << "#   2 -> Triangular Approximation #" << "\n"
                   << "#   3 -> Other Heuristics         #" << "\n"
+                  << "#   B -> BACK                     #" << "\n"
                   << "#   E -> EXIT                     #" << "\n"
                   << "#                                 #" << "\n"
                   << "###################################" << "\n"
@@ -63,7 +64,11 @@ void Menu::chooseAlgorithm() {
             triang();
         } else if (inp == "3") {
             heuristic();
-        } else if (inp == "e" || inp == "E") {
+        }
+        else if (inp == "B" || inp == "b") {
+            init();
+        }
+        else if (inp == "e" || inp == "E") {
             end();
             exit(0);
         } else {
@@ -83,6 +88,7 @@ void Menu::realWorldGraphMenu() {
                   << "#   1 -> graph1                   #" << "\n"
                   << "#   2 -> graph2                   #" << "\n"
                   << "#   3 -> graph3                   #" << "\n"
+                  << "#   B -> BACK                     #" << "\n"
                   << "#   E -> EXIT                     #" << "\n"
                   << "#                                 #" << "\n"
                   << "###################################" << "\n"
@@ -102,6 +108,8 @@ void Menu::realWorldGraphMenu() {
             if (finalGraph) finalGraph->clearAllNodes();
             realWorldGraph("../data_to_test/Real-world Graphs/graph3/nodes.csv", "../data_to_test/Real-world Graphs/graph3/edges.csv");
             chooseAlgorithm();
+        } else if (inp == "B" || inp == "b") {
+            init();
         } else if (inp == "e" || inp == "E") {
             end();
             exit(0);
@@ -122,6 +130,7 @@ void Menu::toyGraphMenu() {
                   << "#   1 -> shipping                 #" << "\n"
                   << "#   2 -> stadiums                 #" << "\n"
                   << "#   3 -> tourism                  #" << "\n"
+                  << "#   B -> BACK                     #" << "\n"
                   << "#   E -> EXIT                     #" << "\n"
                   << "#                                 #" << "\n"
                   << "###################################" << "\n"
@@ -141,7 +150,11 @@ void Menu::toyGraphMenu() {
             if (finalGraph) finalGraph->clearAllNodes();
             toyGraph("../data_to_test/Toy-graphs/tourism.csv");
             chooseAlgorithm();
-        } else if (inp == "e" || inp == "E") {
+        }
+        else if (inp == "B" || inp == "b") {
+            init();
+        }
+        else if (inp == "e" || inp == "E") {
             end();
             exit(0);
         } else {
@@ -162,6 +175,8 @@ void Menu::extraGraphMenu() {
                   << "#  300 | 400  | 500  |  600  |  700 #" << "\n"
                   << "#            800 | 900              #" << "\n"
                   << "#                                   #" << "\n"
+                  << "#   B -> BACK                       #" << "\n"
+                  << "#   E -> EXIT                       #" << "\n"
                   << "#####################################" << "\n"
                   << "Option: " << std::endl;
 
@@ -176,7 +191,11 @@ void Menu::extraGraphMenu() {
         } else if (inp == "e" || inp == "E") {
             end();
             exit(0);
-        } else {
+        }
+        else if (inp == "B" || inp == "b") {
+            init();
+        }
+        else {
             std::cout << "Insert a valid input!" << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -185,202 +204,70 @@ void Menu::extraGraphMenu() {
 }
 
 void Menu::backtracking() {
-    std::vector<Node*> path;
+    std::vector<Node *> path;
     auto start = std::chrono::high_resolution_clock::now();
-    double minDistance = finalGraph->solveTSPBacktracking(path);
+    double distance = finalGraph->solveTSPBacktracking(path);
+    distance = finalGraph->twoOptOptimization(path, distance);
     auto finish = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = finish - start;
 
-    std::cout << "|-----------------------------------------------------------|\n";
-    std::cout << "|                                                           |\n";
-    std::cout << "| The shortest path found has a distance of " << minDistance << " meters";
+    std::cout << "| The heuristic found a distance of " << distance << " meters";
 
-    std::cout << std::string(5, ' ') << "|\n";
-    std::cout << "| Total time elapsed: " << elapsed.count() << " seconds" << std::string(59 - 29 - std::to_string(elapsed.count()).length(), ' ') << "|\n";
-    std::cout << "|                                                           |\n";
-    std::cout << "| Do you wish to see the path?                              |\n";
-    std::cout << "| Enter here your choice (yes/no): ";
-    std::string choice;
-    while (true) {
-        std::getline(std::cin, choice);
-        if (choice == "yes") {
-            int charCounter = 1;
-            std::cout << "|                                                           |\n";
-            std::cout << "| The path is:                                              |\n";
-            std::cout << "| ";
-            for (int i = 0; i < path.size(); i++) {
-                charCounter += (4 + std::to_string(path[i]->getIndex()).length());
-                if (charCounter > 58) {
-                    std::cout << std::string(59 - charCounter + std::to_string(path[i]->getIndex()).length() + 4, ' ') << "|\n";
-                    std::cout << "| ";
-                    charCounter = (1 + 4 + std::to_string(path[i]->getIndex()).length());
-                }
-                if (i == path.size() - 1) {
-                    std::cout << path[i]->getIndex();
-                    charCounter -= 4;
-                } else {
-                    std::cout << path[i]->getIndex() << " -> ";
-                }
-            }
-            charCounter += 5;
-            if (charCounter > 58) {
-                std::cout << std::string(59 - charCounter, ' ') << "| \n";
-                charCounter = 5;
-            }
+    std::cout << std::string(5, ' ') << "\n";
+    std::cout << "| Total time elapsed: " << elapsed.count() << " seconds"
+              << std::string(59 - 29 - std::to_string(elapsed.count()).length(), ' ') << "\n";
 
-            std::cout << " -> 0" << std::string(59 - charCounter, ' ') << "|\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "|-----------------------------------------------------------|\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "| - BACKTRACKING MENU -                                     |\n";
-            break;
-        } else if (choice == "no") {
-            std::cout << "|                                                           |\n";
-            std::cout << "|-----------------------------------------------------------|\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "| - BACKTRACKING MENU -                                     |\n";
-            break;
-        } else {
-            std::cout << "|                                                           |\n";
-            std::cout << "| Not a valid input, please try again                       |\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "| Do you wish to see the path?                              |\n";
-            std::cout << "| Enter here your choice (yes/no): ";
-        }
+    std::cout << "| The path is:\n";
+    cout << "0";
+    for (int i = 1; i < path.size(); i++) {
+        std::cout << " -> " << path[i]->getIndex();
     }
+    cout << endl;
+
 }
 
 void Menu::triang() {
-    std::vector<Node*> path;
+    std::vector<Node *> path;
     auto start = std::chrono::high_resolution_clock::now();
     double distance = finalGraph->triangularApproximationHeuristic(path);
+    distance = finalGraph->twoOptOptimization(path, distance);
     auto finish = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = finish - start;
 
-    std::cout << "|-----------------------------------------------------------|\n";
-    std::cout << "|                                                           |\n";
-    std::cout << "| The triangular approximation heuristic found a distance of " << distance << " meters";
+    std::cout << "| The heuristic found a distance of " << distance << " meters";
 
-    std::cout << std::string(5, ' ') << "|\n";
-    std::cout << "| Total time elapsed: " << elapsed.count() << " seconds" << std::string(59 - 29 - std::to_string(elapsed.count()).length(), ' ') << "|\n";
-    std::cout << "|                                                           |\n";
-    std::cout << "| Do you wish to see the path?                              |\n";
-    std::cout << "| Enter here your choice (yes/no): ";
-    std::string choice;
-    while (true) {
-        std::getline(std::cin, choice);
-        if (choice == "yes") {
-            int charCounter = 1;
-            std::cout << "|                                                           |\n";
-            std::cout << "| The path is:                                              |\n";
-            std::cout << "| ";
-            for (int i = 0; i < path.size(); i++) {
-                charCounter += (4 + std::to_string(path[i]->getIndex()).length());
-                if (charCounter > 58) {
-                    std::cout << std::string(59 - charCounter + std::to_string(path[i]->getIndex()).length() + 4, ' ') << "|\n";
-                    std::cout << "| ";
-                    charCounter = (1 + 4 + std::to_string(path[i]->getIndex()).length());
-                }
-                if (i == path.size() - 1) {
-                    std::cout << path[i]->getIndex();
-                    charCounter -= 4;
-                } else {
-                    std::cout << path[i]->getIndex() << " -> ";
-                }
-            }
-            charCounter += 5;
-            if (charCounter > 58) {
-                std::cout << std::string(59 - charCounter, ' ') << "| \n";
-                charCounter = 5;
-            }
+    std::cout << std::string(5, ' ') << "\n";
+    std::cout << "| Total time elapsed: " << elapsed.count() << " seconds"
+              << std::string(59 - 29 - std::to_string(elapsed.count()).length(), ' ') << "\n";
 
-            std::cout << " -> 0" << std::string(59 - charCounter, ' ') << "|\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "|-----------------------------------------------------------|\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "| - TRIANGULAR APPROXIMATION MENU -                         |\n";
-            break;
-        } else if (choice == "no") {
-            std::cout << "|                                                           |\n";
-            std::cout << "|-----------------------------------------------------------|\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "| - TRIANGULAR APPROXIMATION MENU -                         |\n";
-            break;
-        } else {
-            std::cout << "|                                                           |\n";
-            std::cout << "| Not a valid input, please try again                       |\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "| Do you wish to see the path?                              |\n";
-            std::cout << "| Enter here your choice (yes/no): ";
-        }
+    std::cout << "| The path is:\n";
+    cout << "0";
+    for (int i = 1; i < path.size(); i++) {
+        std::cout << " -> " << path[i]->getIndex();
     }
+    cout << endl;
 }
 
 void Menu::heuristic() {
-    std::vector<Node*> path;
+    std::vector<Node *> path;
     auto start = std::chrono::high_resolution_clock::now();
     double distance = finalGraph->nearestNeighborHeuristic(path);
     distance = finalGraph->twoOptOptimization(path, distance);
     auto finish = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = finish - start;
 
-    std::cout << "|-----------------------------------------------------------|\n";
-    std::cout << "|                                                           |\n";
     std::cout << "| The heuristic found a distance of " << distance << " meters";
 
-    std::cout << std::string(5, ' ') << "|\n";
-    std::cout << "| Total time elapsed: " << elapsed.count() << " seconds" << std::string(59 - 29 - std::to_string(elapsed.count()).length(), ' ') << "|\n";
-    std::cout << "|                                                           |\n";
-    std::cout << "| Do you wish to see the path?                              |\n";
-    std::cout << "| Enter here your choice (yes/no): ";
-    std::string choice;
-    while (true) {
-        std::getline(std::cin, choice);
-        if (choice == "yes") {
-            int charCounter = 1;
-            std::cout << "|                                                           |\n";
-            std::cout << "| The path is:                                              |\n";
-            std::cout << "| ";
-            for (int i = 0; i < path.size(); i++) {
-                charCounter += (4 + std::to_string(path[i]->getIndex()).length());
-                if (charCounter > 58) {
-                    std::cout << std::string(59 - charCounter + std::to_string(path[i]->getIndex()).length() + 4, ' ') << "|\n";
-                    std::cout << "| ";
-                    charCounter = (1 + 4 + std::to_string(path[i]->getIndex()).length());
-                }
-                if (i == path.size() - 1) {
-                    std::cout << path[i]->getIndex();
-                    charCounter -= 4;
-                } else {
-                    std::cout << path[i]->getIndex() << " -> ";
-                }
-            }
-            charCounter += 5;
-            if (charCounter > 58) {
-                std::cout << std::string(59 - charCounter, ' ') << "| \n";
-                charCounter = 5;
-            }
+    std::cout << std::string(5, ' ') << "\n";
+    std::cout << "| Total time elapsed: " << elapsed.count() << " seconds"
+              << std::string(59 - 29 - std::to_string(elapsed.count()).length(), ' ') << "\n";
 
-            std::cout << " -> 0" << std::string(59 - charCounter, ' ') << "|\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "|-----------------------------------------------------------|\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "| - HEURISTIC MENU -                                        |\n";
-            break;
-        } else if (choice == "no") {
-            std::cout << "|                                                           |\n";
-            std::cout << "|-----------------------------------------------------------|\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "| - HEURISTIC MENU -                                        |\n";
-            break;
-        } else {
-            std::cout << "|                                                           |\n";
-            std::cout << "| Not a valid input, please try again                       |\n";
-            std::cout << "|                                                           |\n";
-            std::cout << "| Do you wish to see the path?                              |\n";
-            std::cout << "| Enter here your choice (yes/no): ";
-        }
+    std::cout << "| The path is:\n";
+    cout << "0";
+    for (int i = 1; i < path.size(); i++) {
+        std::cout << " -> " << path[i]->getIndex();
     }
+    cout << endl;
 }
 
 void Menu::end() {

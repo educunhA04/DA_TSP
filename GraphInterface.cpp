@@ -160,7 +160,9 @@ double GraphInterface::triangularApproximationHeuristic(std::vector<Node*>& path
             next_node->setVisited(true);
             path.push_back(next_node);
             current_node = next_node;
-        } else {
+        }
+
+        else {
             break;
         }
     }
