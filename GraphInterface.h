@@ -3,19 +3,21 @@
 #include "Graph.h"
 
 class GraphInterface {
-    public:
-        //Graph Operations
-        Node *findNode(int index);
-        bool addNode(const int &index, double latitude = 0, double longitude = 0);
-        bool addBidirectionalEdge(const int &node1, const int &node2, double w);
-        Node *getNode(const int &index);
-        vector<Node *> getNodes();
-        void clearAllNodes();
+public:
+    // Graph Operations
+    Node *findNode(int index);
+    bool addNode(const int &index, double latitude = 0, double longitude = 0);
+    bool addBidirectionalEdge(const int &node1, const int &node2, double w);
+    Node *getNode(const int &index);
+    std::vector<Node *> getNodes();
+    void clearAllNodes();
 
-        //Algorithms
-    private:
-        std::vector<Node*> nodes;
+// algorithms
+    double solveTSPBacktracking(vector<Node*>& path);
+
+private:
+    vector<Node*> nodes;
+    void backtrackTSP(Node* current_node, unsigned int level, double total_distance, vector<Node*>& current_path, double& best_distance, vector<Node*>& best_path);
 };
 
-
-#endif //DA_TSP_GRAPHINTERFACE_H
+#endif // DA_TSP_GRAPHINTERFACE_H

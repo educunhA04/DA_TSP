@@ -20,6 +20,12 @@ GraphInterface *toyGraph(const string &filepath) {
 
     string line;
 
+    if (!getline(file, line)) {
+        cerr << "Empty file" << endl;
+        delete graph;
+        return nullptr;
+    }
+
     // Determine the number of columns in the CSV file
     int num_columns = count(line.begin(), line.end(), ',') + 1;
 
