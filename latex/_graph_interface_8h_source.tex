@@ -1,0 +1,49 @@
+\doxysection{Graph\+Interface.\+h}
+\hypertarget{_graph_interface_8h_source}{}\label{_graph_interface_8h_source}\index{/Users/rodrigoaraujo/CLionProjects/untitled/DA\_TSP/GraphInterface.h@{/Users/rodrigoaraujo/CLionProjects/untitled/DA\_TSP/GraphInterface.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GRAPHINTERFACE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GRAPHINTERFACE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Graph.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_graph_interface}{GraphInterface}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}*\ \mbox{\hyperlink{class_graph_interface_aeab71217765fa29117875e35c0775889}{findNode}}(\textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}*\ \mbox{\hyperlink{class_graph_interface_a5d624e18eab3d0be598b0f65b9b25e50}{getNode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ index);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00036\ \ \ \ \ std::vector<Node*>\ \mbox{\hyperlink{class_graph_interface_a5f00801488a1360094fdb9b8daf72432}{getNodes}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_interface_aa977387c976aefe85f2933398e2b4c61}{clearAllNodes}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_graph_interface_a6a5b8b8ae56eb1311edaedf6b7fcbacb}{addNode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ index,\ \textcolor{keywordtype}{double}\ latitude\ =\ 0,\ \textcolor{keywordtype}{double}\ longitude\ =\ 0);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_graph_interface_af8fd6d8318fddbb63cd064cc598b5efa}{addBidirectionalEdge}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ node1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ node2,\ \textcolor{keywordtype}{double}\ w);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_graph_interface_a4054ee7e790f1e05b6bf306814b24d77}{solveTSPBacktracking}}(std::vector<Node*>\&\ path);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_graph_interface_aceccc1c2f21b93731ff11274f645d11a}{triangularApproximationHeuristic}}(std::vector<Node*>\&\ path);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_graph_interface_a6e06f29f0b520c4729951d39c4cf743b}{nearestNeighborHeuristic}}(std::vector<Node*>\&\ path);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_graph_interface_a5353575b322a611871547973e3b4eb10}{twoOptOptimization}}(std::vector<Node*>\&\ path,\ \textcolor{keywordtype}{double}\ current\_distance);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00108\ \ \ \ \ std::vector<Node*>\ nodes;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ Helper\ methods...}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ backtrackTSP(\mbox{\hyperlink{class_node}{Node}}*\ current\_node,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ current\_index,\ \textcolor{keywordtype}{double}\ total\_distance,\ std::vector<Node*>\&\ current\_path,\ \textcolor{keywordtype}{double}\&\ best\_distance,\ std::vector<Node*>\&\ best\_path);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{double}\ toRadians(\textcolor{keywordtype}{double}\ degrees);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{double}\ haversine(\textcolor{keywordtype}{double}\ lat1,\ \textcolor{keywordtype}{double}\ lon1,\ \textcolor{keywordtype}{double}\ lat2,\ \textcolor{keywordtype}{double}\ lon2);}
+\DoxyCodeLine{00117\ \};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAPHINTERFACE\_H}}
+
+\end{DoxyCode}

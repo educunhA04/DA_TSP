@@ -1,0 +1,100 @@
+\doxysection{Graph.\+h}
+\hypertarget{_graph_8h_source}{}\label{_graph_8h_source}\index{/Users/rodrigoaraujo/CLionProjects/untitled/DA\_TSP/Graph.h@{/Users/rodrigoaraujo/CLionProjects/untitled/DA\_TSP/Graph.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ DA\_TSP\_GRAPH\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ DA\_TSP\_GRAPH\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_edge}{Edge}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_node}{Node}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{double}\ latitude,\ \textcolor{keywordtype}{double}\ longitude);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}(\textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_node_a53d6bc446575b5a6e472e347964d9b34}{operator<}}(\mbox{\hyperlink{class_node}{Node}}\ \&\ node)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ queueIndex\ =\ 0;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_node_ab19ccd880a7acbe1efa28949c053fa58}{getIndex}}();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_node_a6a76240688eddc8a2942618074e28c92}{getLatitude}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_node_ad4a79ebbcca46dae4638ffbe4d732399}{getLongitude}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ std::vector<Edge\ *>\ \mbox{\hyperlink{class_node_a041b6150cb6e616ef0b4491c4608813d}{getAdj}}();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_node_a97dd8f95e09a0516f8939627f94bd58e}{isVisited}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_node_a72a0f9bd8f283c3fb536cda8fb30173a}{getIndegree}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_node_aef2fab11e82901b2a35af6c4837d18b2}{getDist}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}\ *\mbox{\hyperlink{class_node_aa65cdeade5f183eea5b8642b9a37acbe}{getPath}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ std::vector<Edge\ *>\ \mbox{\hyperlink{class_node_a31588b7dbc92f5e05f723953f167d1f4}{getIncoming}}();}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_node_a6fe3ebcd0eaf9fece72dfbc0ffc257bb}{setVisited}}(\textcolor{keywordtype}{bool}\ visited);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_node_a32ae13821030bd224e31a1bf4cd6880c}{setIndegree}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ indegree);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_node_a2b362ede276752ef43c1cc45eeb64b79}{setDist}}(\textcolor{keywordtype}{double}\ dist);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_node_acf6663d813e9acfc2bbc09001f1cb29e}{setPath}}(\mbox{\hyperlink{class_edge}{Edge}}\ *path);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}\ *\ \mbox{\hyperlink{class_node_ac7b3541b7d40a80cdd1f60d21140a8e2}{addEdge}}(\mbox{\hyperlink{class_node}{Node}}\ *dest,\ \textcolor{keywordtype}{double}\ w);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_node_a38d33bf250a61c5c5df8b1b685352947}{removeEdge}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_node_a733fbe1650a25553eb1a8b24d0f1d2d1}{deleteEdge}}(\mbox{\hyperlink{class_edge}{Edge}}\ *edge);}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_node_a65aa2df51dd000de1c936f2650455243}{removeOutgoingEdges}}();}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{int}\ index;\ }
+\DoxyCodeLine{00147\ \ \ \ \ std::string\ label;\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{double}\ latitude;\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{double}\ longitude;\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{double}\ dist\ =\ 0;\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{bool}\ visited\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}\ *path\ =\ \textcolor{keyword}{nullptr};\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ indegree;\ }
+\DoxyCodeLine{00154\ \ \ \ \ std::vector<Edge*>\ adj;\ }
+\DoxyCodeLine{00155\ \ \ \ \ std::vector<Edge*>\ incoming;\ }
+\DoxyCodeLine{00156\ \};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00162\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_edge}{Edge}}\ \{}
+\DoxyCodeLine{00163\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00170\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}(\mbox{\hyperlink{class_node}{Node}}\ *orig,\ \mbox{\hyperlink{class_node}{Node}}\ *dest,\ \textcolor{keywordtype}{double}\ w);}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00176\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}(\textcolor{keywordtype}{double}\ w);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00182\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}\ *\ \mbox{\hyperlink{class_edge_a98dfeefa18dca75604a7f31bf2b34074}{getDest}}();}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge_a3a776c1ccafacdbdb10fdedd9cb329af}{getWeight}}();}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00194\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}\ *\ \mbox{\hyperlink{class_edge_a1f940794e5983f2e163e81f5244c23b5}{getOrig}}();}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}\ *\mbox{\hyperlink{class_edge_a3794f82c97be1bbc15c5638a965d3d4c}{getReverse}}();}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_edge_a64881280015bd83702fe3b2c6234b7e5}{setReverse}}(\mbox{\hyperlink{class_edge}{Edge}}\ *reverse);}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00209\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}\ *dest;\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{double}\ weight;\ }
+\DoxyCodeLine{00211\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}\ *orig;\ }
+\DoxyCodeLine{00212\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}\ *reverse\ =\ \textcolor{keyword}{nullptr};\ }
+\DoxyCodeLine{00213\ \};}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_TSP\_GRAPH\_H}}
+\DoxyCodeLine{00216\ }
+
+\end{DoxyCode}

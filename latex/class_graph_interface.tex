@@ -1,0 +1,225 @@
+\doxysection{Graph\+Interface Class Reference}
+\hypertarget{class_graph_interface}{}\label{class_graph_interface}\index{GraphInterface@{GraphInterface}}
+
+
+Interface for interacting with the graph and implementing graph algorithms.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Interface.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_interface_aeab71217765fa29117875e35c0775889}{find\+Node}} (int index)
+\begin{DoxyCompactList}\small\item\em Find a node by its index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_interface_a5d624e18eab3d0be598b0f65b9b25e50}{get\+Node}} (const int \&index)
+\begin{DoxyCompactList}\small\item\em Get a node by its index. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_graph_interface_a5f00801488a1360094fdb9b8daf72432}{get\+Nodes}} ()
+\begin{DoxyCompactList}\small\item\em Get all nodes in the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_interface_aa977387c976aefe85f2933398e2b4c61}{clear\+All\+Nodes}} ()
+\begin{DoxyCompactList}\small\item\em Clear all nodes from the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_interface_a6a5b8b8ae56eb1311edaedf6b7fcbacb}{add\+Node}} (const int \&index, double latitude=0, double longitude=0)
+\begin{DoxyCompactList}\small\item\em Add a node to the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_interface_af8fd6d8318fddbb63cd064cc598b5efa}{add\+Bidirectional\+Edge}} (const int \&node1, const int \&node2, double w)
+\begin{DoxyCompactList}\small\item\em Add a bidirectional edge between two nodes. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_graph_interface_a4054ee7e790f1e05b6bf306814b24d77}{solve\+TSPBacktracking}} (std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Solve the Traveling Salesman Problem (TSP) using backtracking. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_graph_interface_aceccc1c2f21b93731ff11274f645d11a}{triangular\+Approximation\+Heuristic}} (std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Approximate the solution to TSP using the Triangular Approximation heuristic. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_graph_interface_a6e06f29f0b520c4729951d39c4cf743b}{nearest\+Neighbor\+Heuristic}} (std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Approximate the solution to TSP using the Nearest Neighbor heuristic. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_graph_interface_a5353575b322a611871547973e3b4eb10}{two\+Opt\+Optimization}} (std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&path, double current\+\_\+distance)
+\begin{DoxyCompactList}\small\item\em Optimize the initial tour using the 2-\/opt optimization algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for interacting with the graph and implementing graph algorithms. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_graph_interface_af8fd6d8318fddbb63cd064cc598b5efa}\label{class_graph_interface_af8fd6d8318fddbb63cd064cc598b5efa} 
+\index{GraphInterface@{GraphInterface}!addBidirectionalEdge@{addBidirectionalEdge}}
+\index{addBidirectionalEdge@{addBidirectionalEdge}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{addBidirectionalEdge()}{addBidirectionalEdge()}}
+{\footnotesize\ttfamily bool Graph\+Interface\+::add\+Bidirectional\+Edge (\begin{DoxyParamCaption}\item[{const int \&}]{node1,  }\item[{const int \&}]{node2,  }\item[{double}]{w }\end{DoxyParamCaption})}
+
+
+
+Add a bidirectional edge between two nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node1} & The index of the first node. \\
+\hline
+{\em node2} & The index of the second node. \\
+\hline
+{\em w} & The weight of the edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the edge was added successfully, false if one or both nodes do not exist.
+\end{DoxyReturn}
+Time complexity\+: O(n), where n is the number of nodes. \Hypertarget{class_graph_interface_a6a5b8b8ae56eb1311edaedf6b7fcbacb}\label{class_graph_interface_a6a5b8b8ae56eb1311edaedf6b7fcbacb} 
+\index{GraphInterface@{GraphInterface}!addNode@{addNode}}
+\index{addNode@{addNode}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{addNode()}{addNode()}}
+{\footnotesize\ttfamily bool Graph\+Interface\+::add\+Node (\begin{DoxyParamCaption}\item[{const int \&}]{index,  }\item[{double}]{latitude = {\ttfamily 0},  }\item[{double}]{longitude = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Add a node to the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the new node. \\
+\hline
+{\em latitude} & The latitude of the new node. \\
+\hline
+{\em longitude} & The longitude of the new node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the node was added successfully, false if a node with the same index already exists.
+\end{DoxyReturn}
+Time complexity\+: O(n), where n is the number of nodes. \Hypertarget{class_graph_interface_aa977387c976aefe85f2933398e2b4c61}\label{class_graph_interface_aa977387c976aefe85f2933398e2b4c61} 
+\index{GraphInterface@{GraphInterface}!clearAllNodes@{clearAllNodes}}
+\index{clearAllNodes@{clearAllNodes}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{clearAllNodes()}{clearAllNodes()}}
+{\footnotesize\ttfamily void Graph\+Interface\+::clear\+All\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear all nodes from the graph. 
+
+Removes all nodes and their associated edges from the graph.
+
+Time complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}2), where n is the number of nodes. \Hypertarget{class_graph_interface_aeab71217765fa29117875e35c0775889}\label{class_graph_interface_aeab71217765fa29117875e35c0775889} 
+\index{GraphInterface@{GraphInterface}!findNode@{findNode}}
+\index{findNode@{findNode}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{findNode()}{findNode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} Graph\+Interface\+::find\+Node (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Find a node by its index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the node to find. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the found node, or nullptr if not found.
+\end{DoxyReturn}
+Time complexity\+: O(n), where n is the number of nodes. \Hypertarget{class_graph_interface_a5d624e18eab3d0be598b0f65b9b25e50}\label{class_graph_interface_a5d624e18eab3d0be598b0f65b9b25e50} 
+\index{GraphInterface@{GraphInterface}!getNode@{getNode}}
+\index{getNode@{getNode}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{getNode()}{getNode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} Graph\+Interface\+::get\+Node (\begin{DoxyParamCaption}\item[{const int \&}]{index }\end{DoxyParamCaption})}
+
+
+
+Get a node by its index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the node to get. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the node with the given index, or nullptr if not found.
+\end{DoxyReturn}
+Time complexity\+: O(n), where n is the number of nodes. \Hypertarget{class_graph_interface_a5f00801488a1360094fdb9b8daf72432}\label{class_graph_interface_a5f00801488a1360094fdb9b8daf72432} 
+\index{GraphInterface@{GraphInterface}!getNodes@{getNodes}}
+\index{getNodes@{getNodes}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{getNodes()}{getNodes()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ Graph\+Interface\+::get\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get all nodes in the graph. 
+
+\begin{DoxyReturn}{Returns}
+A vector containing pointers to all nodes in the graph.
+\end{DoxyReturn}
+Time complexity\+: O(1). \Hypertarget{class_graph_interface_a6e06f29f0b520c4729951d39c4cf743b}\label{class_graph_interface_a6e06f29f0b520c4729951d39c4cf743b} 
+\index{GraphInterface@{GraphInterface}!nearestNeighborHeuristic@{nearestNeighborHeuristic}}
+\index{nearestNeighborHeuristic@{nearestNeighborHeuristic}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{nearestNeighborHeuristic()}{nearestNeighborHeuristic()}}
+{\footnotesize\ttfamily double Graph\+Interface\+::nearest\+Neighbor\+Heuristic (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Approximate the solution to TSP using the Nearest Neighbor heuristic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Output parameter to store the approximate shortest path found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The approximate total distance of the shortest path.
+\end{DoxyReturn}
+Time complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}2), where n is the number of nodes. \Hypertarget{class_graph_interface_a4054ee7e790f1e05b6bf306814b24d77}\label{class_graph_interface_a4054ee7e790f1e05b6bf306814b24d77} 
+\index{GraphInterface@{GraphInterface}!solveTSPBacktracking@{solveTSPBacktracking}}
+\index{solveTSPBacktracking@{solveTSPBacktracking}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{solveTSPBacktracking()}{solveTSPBacktracking()}}
+{\footnotesize\ttfamily double Graph\+Interface\+::solve\+TSPBacktracking (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Solve the Traveling Salesman Problem (TSP) using backtracking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Output parameter to store the shortest path found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total distance of the shortest path.
+\end{DoxyReturn}
+Time complexity\+: O(n!), where n is the number of nodes. \Hypertarget{class_graph_interface_aceccc1c2f21b93731ff11274f645d11a}\label{class_graph_interface_aceccc1c2f21b93731ff11274f645d11a} 
+\index{GraphInterface@{GraphInterface}!triangularApproximationHeuristic@{triangularApproximationHeuristic}}
+\index{triangularApproximationHeuristic@{triangularApproximationHeuristic}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{triangularApproximationHeuristic()}{triangularApproximationHeuristic()}}
+{\footnotesize\ttfamily double Graph\+Interface\+::triangular\+Approximation\+Heuristic (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Approximate the solution to TSP using the Triangular Approximation heuristic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Output parameter to store the approximate shortest path found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The approximate total distance of the shortest path.
+\end{DoxyReturn}
+Time complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}2), where n is the number of nodes. \Hypertarget{class_graph_interface_a5353575b322a611871547973e3b4eb10}\label{class_graph_interface_a5353575b322a611871547973e3b4eb10} 
+\index{GraphInterface@{GraphInterface}!twoOptOptimization@{twoOptOptimization}}
+\index{twoOptOptimization@{twoOptOptimization}!GraphInterface@{GraphInterface}}
+\doxysubsubsection{\texorpdfstring{twoOptOptimization()}{twoOptOptimization()}}
+{\footnotesize\ttfamily double Graph\+Interface\+::two\+Opt\+Optimization (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&}]{path,  }\item[{double}]{current\+\_\+distance }\end{DoxyParamCaption})}
+
+
+
+Optimize the initial tour using the 2-\/opt optimization algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The initial tour to optimize. \\
+\hline
+{\em current\+\_\+distance} & The current total distance of the initial tour. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The optimized total distance of the tour.
+\end{DoxyReturn}
+Time complexity\+: O(n\texorpdfstring{$^\wedge$}{\string^}2), where n is the number of nodes. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/rodrigoaraujo/\+CLion\+Projects/untitled/\+DA\+\_\+\+TSP/Graph\+Interface.\+h\item 
+/\+Users/rodrigoaraujo/\+CLion\+Projects/untitled/\+DA\+\_\+\+TSP/Graph\+Interface.\+cpp\end{DoxyCompactItemize}

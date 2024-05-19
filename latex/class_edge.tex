@@ -1,0 +1,144 @@
+\doxysection{Edge Class Reference}
+\hypertarget{class_edge}{}\label{class_edge}\index{Edge@{Edge}}
+
+
+Class representing an edge in the graph.  
+
+
+
+
+{\ttfamily \#include $<$Graph.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_edge_abdd628dd626fefea2ac47d25ca708b8f}{Edge}} (\mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*}orig, \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*}dest, double w)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_edge}{Edge} with origin, destination, and weight. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_a679450670c846e6e67b805534e6ebb8a}{Edge}} (double w)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_edge}{Edge} with weight only. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_edge_a98dfeefa18dca75604a7f31bf2b34074}{get\+Dest}} ()
+\begin{DoxyCompactList}\small\item\em Get the destination node of the edge. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_edge_a3a776c1ccafacdbdb10fdedd9cb329af}{get\+Weight}} ()
+\begin{DoxyCompactList}\small\item\em Get the weight of the edge. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_edge_a1f940794e5983f2e163e81f5244c23b5}{get\+Orig}} ()
+\begin{DoxyCompactList}\small\item\em Get the origin node of the edge. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_edge_a3794f82c97be1bbc15c5638a965d3d4c}{get\+Reverse}} ()
+\begin{DoxyCompactList}\small\item\em Get the reverse edge. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_edge_a64881280015bd83702fe3b2c6234b7e5}{set\+Reverse}} (\mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*}reverse)
+\begin{DoxyCompactList}\small\item\em Set the reverse edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing an edge in the graph. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_edge_abdd628dd626fefea2ac47d25ca708b8f}\label{class_edge_abdd628dd626fefea2ac47d25ca708b8f} 
+\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*}}]{orig,  }\item[{\mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*}}]{dest,  }\item[{double}]{w }\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{class_edge}{Edge} with origin, destination, and weight. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em orig} & The origin node of the edge. \\
+\hline
+{\em dest} & The destination node of the edge. \\
+\hline
+{\em w} & The weight of the edge. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_edge_a679450670c846e6e67b805534e6ebb8a}\label{class_edge_a679450670c846e6e67b805534e6ebb8a} 
+\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{double}]{w }\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{class_edge}{Edge} with weight only. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & The weight of the edge. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_edge_a98dfeefa18dca75604a7f31bf2b34074}\label{class_edge_a98dfeefa18dca75604a7f31bf2b34074} 
+\index{Edge@{Edge}!getDest@{getDest}}
+\index{getDest@{getDest}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getDest()}{getDest()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} Edge\+::get\+Dest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the destination node of the edge. 
+
+\begin{DoxyReturn}{Returns}
+The destination node of the edge. 
+\end{DoxyReturn}
+\Hypertarget{class_edge_a1f940794e5983f2e163e81f5244c23b5}\label{class_edge_a1f940794e5983f2e163e81f5244c23b5} 
+\index{Edge@{Edge}!getOrig@{getOrig}}
+\index{getOrig@{getOrig}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getOrig()}{getOrig()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_node}{Node}} \texorpdfstring{$\ast$}{*} Edge\+::get\+Orig (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the origin node of the edge. 
+
+\begin{DoxyReturn}{Returns}
+The origin node of the edge. 
+\end{DoxyReturn}
+\Hypertarget{class_edge_a3794f82c97be1bbc15c5638a965d3d4c}\label{class_edge_a3794f82c97be1bbc15c5638a965d3d4c} 
+\index{Edge@{Edge}!getReverse@{getReverse}}
+\index{getReverse@{getReverse}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getReverse()}{getReverse()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*} Edge\+::get\+Reverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the reverse edge. 
+
+\begin{DoxyReturn}{Returns}
+The reverse edge. 
+\end{DoxyReturn}
+\Hypertarget{class_edge_a3a776c1ccafacdbdb10fdedd9cb329af}\label{class_edge_a3a776c1ccafacdbdb10fdedd9cb329af} 
+\index{Edge@{Edge}!getWeight@{getWeight}}
+\index{getWeight@{getWeight}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getWeight()}{getWeight()}}
+{\footnotesize\ttfamily double Edge\+::get\+Weight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the weight of the edge. 
+
+\begin{DoxyReturn}{Returns}
+The weight of the edge. 
+\end{DoxyReturn}
+\Hypertarget{class_edge_a64881280015bd83702fe3b2c6234b7e5}\label{class_edge_a64881280015bd83702fe3b2c6234b7e5} 
+\index{Edge@{Edge}!setReverse@{setReverse}}
+\index{setReverse@{setReverse}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{setReverse()}{setReverse()}}
+{\footnotesize\ttfamily void Edge\+::set\+Reverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}} \texorpdfstring{$\ast$}{*}}]{reverse }\end{DoxyParamCaption})}
+
+
+
+Set the reverse edge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reverse} & The reverse edge to set. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/rodrigoaraujo/\+CLion\+Projects/untitled/\+DA\+\_\+\+TSP/Graph.\+h\item 
+/\+Users/rodrigoaraujo/\+CLion\+Projects/untitled/\+DA\+\_\+\+TSP/Graph.\+cpp\end{DoxyCompactItemize}
