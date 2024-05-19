@@ -14,8 +14,11 @@ public:
 
 // algorithms
     double solveTSPBacktracking(vector<Node*>& path);
+
     double triangularApproximationHeuristic(vector<Node*>& path);
 
+    double nearestNeighborHeuristic(vector<Node*>& path);
+    double twoOptOptimization(vector<Node*>& path, double current_distance);
 
 private:
     vector<Node*> nodes;

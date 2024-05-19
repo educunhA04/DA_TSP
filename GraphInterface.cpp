@@ -188,3 +188,73 @@ double GraphInterface::triangularApproximationHeuristic(vector<Node*>& path) {
 
     return approx_distance;
 }
+
+// task 4.3
+
+double GraphInterface::nearestNeighborHeuristic(vector<Node*>& path) {
+
+    double total_distance = 0.0;
+    vector<bool> visited(nodes.size(), false);
+
+    Node* current_node = nodes[0];
+    path.push_back(current_node);
+    visited[current_node->getIndex()] = true;
+
+    while (path.size() < nodes.size()) {
+        Node* next_node = nullptr;
+        double shortest_distance = DBL_MAX;
+
+        for (Node* neighbor : nodes) {
+
+            if (!visited[neighbor->getIndex()]) {
+                double dist = haversine(current_node->getLatitude(), current_node->getLongitude(), neighbor->getLatitude(), neighbor->getLongitude());
+
+                if (dist < shortest_distance) {
+                    shortest_distance = dist;
+                    next_node = neighbor;
+                }
+            }
+        }
+
+        if (next_node) {
+            total_distance += shortest_distance;
+            current_node = next_node;
+            path.push_back(current_node);
+            visited[current_node->getIndex()] = true;
+        }
+    }
+
+    total_distance += haversine(current_node->getLatitude(), current_node->getLongitude(), nodes[0]->getLatitude(), nodes[0]->getLongitude());
+    path.push_back(nodes[0]);
+
+    total_distance = twoOptOptimization(path, total_distance);
+
+    return total_distance;
+}
+
+double GraphInterface::twoOptOptimization(vector<Node*>& path, double current_distance) {
+    bool improvement = true;
+
+    while (improvement) {
+        improvement = false;
+        for (size_t i = 1; i < path.size() - 2; i++) {
+            for (size_t j = i + 1; j < path.size() - 1; j++) {
+
+                double new_distance = current_distance -
+                                 haversine(path[i-1]->getLatitude(), path[i-1]->getLongitude(), path[i]->getLatitude(), path[i]->getLongitude()) -
+                                 haversine(path[j]->getLatitude(), path[j]->getLongitude(), path[j+1]->getLatitude(), path[j+1]->getLongitude()) +
+                                 haversine(path[i-1]->getLatitude(), path[i-1]->getLongitude(), path[j]->getLatitude(), path[j]->getLongitude()) +
+                                 haversine(path[i]->getLatitude(), path[i]->getLongitude(), path[j+1]->getLatitude(), path[j+1]->getLongitude());
+
+                if (new_distance < current_distance) {
+                    reverse(path.begin() + i, path.begin() + j + 1);
+                    current_distance = new_distance;
+                    improvement = true;
+                }
+            }
+        }
+    }
+
+    return current_distance;
+}
+
