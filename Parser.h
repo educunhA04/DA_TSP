@@ -6,6 +6,8 @@
 #define DA_TSP_PARSER_H
 #include "GraphInterface.h"
 
+extern GraphInterface *finalGraph;
+
 GraphInterface *realWorldGraph(const string& nodesFile, const string& edgesFile);
 
 GraphInterface *extraGraph(const string& edgesFile);

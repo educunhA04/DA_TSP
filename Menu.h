@@ -3,19 +3,19 @@
 #include "Parser.h"
 
 class Menu {
-    protected:
-        GraphInterface graph;
     private:
-        void chooseTypeofGraph();
+        void chooseAlgorithm();
         void realWorldGraphMenu();
         void extraGraphMenu();
         void toyGraphMenu();
-
+        void backtracking();
+        void triang();
+        void heuristic();
 
     public:
-    explicit Menu(GraphInterface graph);
+    Menu();
     void init();
-        static void end();
+    static void end();
 };
 
 

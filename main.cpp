@@ -2,8 +2,7 @@
 #include "Menu.h"
 
 int main() {
-    GraphInterface graph;
-    Menu menu(graph);
+    Menu menu;
     menu.init();
     menu.end();
     return 0;

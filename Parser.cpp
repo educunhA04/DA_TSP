@@ -6,8 +6,11 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <algorithm>
+#include <filesystem>
 using namespace std;
 
+GraphInterface *finalGraph;
 
 GraphInterface *toyGraph(const string &filepath) {
     GraphInterface *graph = new GraphInterface();
@@ -27,7 +30,8 @@ GraphInterface *toyGraph(const string &filepath) {
     }
 
     // Determine the number of columns in the CSV file
-    int num_columns = count(line.begin(), line.end(), ',') + 1;
+    char delimiter = ',';
+    int num_columns = count(line.begin(), line.end(), delimiter) + 1;
 
     getline(file, line);
 
@@ -59,7 +63,7 @@ GraphInterface *toyGraph(const string &filepath) {
         graph->addNode(stoi(dest));
         graph->addBidirectionalEdge(stoi(source), stoi(dest), stod(distance));
     }
-
+    finalGraph = graph;
     return graph;
 }
 
@@ -115,7 +119,7 @@ GraphInterface *realWorldGraph(const string& nodesFile, const string& edgesFile)
         graph->addBidirectionalEdge(stoi(source), stoi(dest), stod(distance));
     }
     edges_file.close();
-
+    finalGraph = graph;
     return graph;
 }
 
@@ -163,6 +167,7 @@ GraphInterface *extraGraph(const string& edgesFile) {
     }
     edges_file.close();
 
+    finalGraph = graph;
     return graph;
 }
 

@@ -1,6 +1,7 @@
 #include "GraphInterface.h"
 #include <cfloat>
-
+#include <cmath>
+#include <algorithm>
 Node *GraphInterface::findNode(int index){
     for (auto v : getNodes()) {
         if (v->getIndex() == index) {
@@ -35,9 +36,9 @@ void GraphInterface::clearAllNodes() {
 
 bool GraphInterface::addNode(const int &index, double latitude, double longitude){
     if (findNode(index) == nullptr) {
-            nodes.push_back(new Node(index, latitude, longitude));
-            return true;
-        }
+        nodes.push_back(new Node(index, latitude, longitude));
+        return true;
+    }
     return false;
 }
 
