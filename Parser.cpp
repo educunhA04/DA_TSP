@@ -1,7 +1,3 @@
-//
-// Created by edumr on 16/05/2024.
-//
-
 #include "Parser.h"
 #include <fstream>
 #include <sstream>
@@ -10,34 +6,24 @@
 #include <filesystem>
 using namespace std;
 
-GraphInterface *finalGraph;
+GraphInterface *finalGraph = nullptr;
 
 GraphInterface *toyGraph(const string &filepath) {
     GraphInterface *graph = new GraphInterface();
     ifstream file(filepath);
 
     if (!file.is_open()) {
-        cerr << "Error opening file" << endl;
+        cerr << "Error opening file: " << filepath << endl;
         return nullptr;
     }
 
     string line;
-
-    if (!getline(file, line)) {
-        cerr << "Empty file" << endl;
-        delete graph;
-        return nullptr;
-    }
-
-    // Determine the number of columns in the CSV file
-    char delimiter = ',';
-    int num_columns = count(line.begin(), line.end(), delimiter) + 1;
-
-    getline(file, line);
+    getline(file, line);  // Skip the header line
 
     while (getline(file, line)) {
         stringstream ss(line);
-        string source, dest, distance, label_source, label_dest;
+        string source, dest, distance;
+        int num_columns = count(line.begin(), line.end(), ',') + 1;
 
         if (num_columns == 3) { // for shipping.csv and stadiums.csv
             getline(ss, source, ',');
@@ -48,13 +34,11 @@ GraphInterface *toyGraph(const string &filepath) {
             getline(ss, source, ',');
             getline(ss, dest, ',');
             getline(ss, distance, ',');
-
-            getline(ss, label_source, ','); // not being used
-            getline(ss, label_dest,','); // not being used
+            ss.ignore(numeric_limits<streamsize>::max(), ','); // Skip label_source
+            ss.ignore(numeric_limits<streamsize>::max(), ','); // Skip label_dest
         }
         else {
-            cerr << "Invalid number of columns in CSV file" << endl;
-            delete graph;
+            cerr << "Invalid number of columns in CSV file: " << filepath << endl;
             return nullptr;
         }
 
@@ -63,28 +47,26 @@ GraphInterface *toyGraph(const string &filepath) {
         graph->addNode(stoi(dest));
         graph->addBidirectionalEdge(stoi(source), stoi(dest), stod(distance));
     }
+
     finalGraph = graph;
-    return graph;
+    return finalGraph;
 }
 
-
-GraphInterface *realWorldGraph(const string& nodesFile, const string& edgesFile) {
+GraphInterface *realWorldGraph(const string &nodesFile, const string &edgesFile) {
     GraphInterface *graph = new GraphInterface();
 
-// load and parse nodes
+    // Load and parse nodes
     ifstream nodes_file(nodesFile);
     if (!nodes_file.is_open()) {
-        cerr << "Error opening nodes file" << endl;
-        delete graph;
+        cerr << "Error opening nodes file: " << nodesFile << endl;
         return nullptr;
     }
 
     string line;
-    getline(nodes_file, line);
+    getline(nodes_file, line); // Skip the header line
 
     while (getline(nodes_file, line)) {
         istringstream iss(line);
-
         string id, latitude, longitude;
 
         getline(iss, id, ',');
@@ -95,15 +77,14 @@ GraphInterface *realWorldGraph(const string& nodesFile, const string& edgesFile)
     }
     nodes_file.close();
 
-// load and parse edges
+    // Load and parse edges
     ifstream edges_file(edgesFile);
     if (!edges_file.is_open()) {
-        cerr << "Error opening edges file" << endl;
-        delete graph;
+        cerr << "Error opening edges file: " << edgesFile << endl;
         return nullptr;
     }
 
-    getline(edges_file, line);
+    getline(edges_file, line); // Skip the header line
 
     while (getline(edges_file, line)) {
         istringstream iss(line);
@@ -113,20 +94,15 @@ GraphInterface *realWorldGraph(const string& nodesFile, const string& edgesFile)
         getline(iss, dest, ',');
         getline(iss, distance, ',');
 
-        graph->addNode(stoi(source));
-        graph->addNode(stoi(dest));
-
         graph->addBidirectionalEdge(stoi(source), stoi(dest), stod(distance));
     }
     edges_file.close();
+
     finalGraph = graph;
-    return graph;
+    return finalGraph;
 }
 
-
-GraphInterface *extraGraph(const string& edgesFile) {
-
-    // Extract the number of nodes from the file name
+GraphInterface *extraGraph(const string &edgesFile) {
     filesystem::path edges_file_path(edgesFile);
     string fileName = edges_file_path.filename().string();
 
@@ -142,15 +118,15 @@ GraphInterface *extraGraph(const string& edgesFile) {
         graph->addNode(i);  // Assuming node IDs start from 0
     }
 
-// load and parse edges
+    // Load and parse edges
     ifstream edges_file(edgesFile);
     if (!edges_file.is_open()) {
-        cerr << "Error opening edges file" << endl;
-        delete graph;
+        cerr << "Error opening edges file: " << edgesFile << endl;
         return nullptr;
     }
 
     string line;
+    getline(edges_file, line); // Skip the header line
 
     while (getline(edges_file, line)) {
         istringstream iss(line);
@@ -160,14 +136,10 @@ GraphInterface *extraGraph(const string& edgesFile) {
         getline(iss, dest, ',');
         getline(iss, distance, ',');
 
-        graph->addNode(stoi(source));
-        graph->addNode(stoi(dest));
-
         graph->addBidirectionalEdge(stoi(source), stoi(dest), stod(distance));
     }
     edges_file.close();
 
     finalGraph = graph;
-    return graph;
+    return finalGraph;
 }
-

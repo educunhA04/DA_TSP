@@ -2,8 +2,9 @@
 #include <cfloat>
 #include <cmath>
 #include <algorithm>
-Node *GraphInterface::findNode(int index){
-    for (auto v : getNodes()) {
+
+Node* GraphInterface::findNode(int index) {
+    for (auto v : nodes) {
         if (v->getIndex() == index) {
             return v;
         }
@@ -11,16 +12,16 @@ Node *GraphInterface::findNode(int index){
     return nullptr;
 }
 
-Node *GraphInterface::getNode(const int &index){
+Node* GraphInterface::getNode(const int& index) {
     return findNode(index);
 }
 
-vector<Node *> GraphInterface::getNodes(){
+std::vector<Node*> GraphInterface::getNodes() {
     return nodes;
 }
 
 void GraphInterface::clearAllNodes() {
-    for (auto & node : nodes){
+    for (auto& node : nodes) {
         node->setPath(nullptr);
     }
     for (auto it = nodes.begin(); it != nodes.end();) {
@@ -34,7 +35,7 @@ void GraphInterface::clearAllNodes() {
     }
 }
 
-bool GraphInterface::addNode(const int &index, double latitude, double longitude){
+bool GraphInterface::addNode(const int& index, double latitude, double longitude) {
     if (findNode(index) == nullptr) {
         nodes.push_back(new Node(index, latitude, longitude));
         return true;
@@ -42,9 +43,9 @@ bool GraphInterface::addNode(const int &index, double latitude, double longitude
     return false;
 }
 
-bool GraphInterface::addBidirectionalEdge(const int &node1, const int &node2, double w){
-    Node *n1 = findNode(node1);
-    Node *n2 = findNode(node2);
+bool GraphInterface::addBidirectionalEdge(const int& node1, const int& node2, double w) {
+    Node* n1 = findNode(node1);
+    Node* n2 = findNode(node2);
     if (n1 != nullptr && n2 != nullptr) {
         n1->addEdge(n2, w);
         n2->addEdge(n1, w);
@@ -53,77 +54,58 @@ bool GraphInterface::addBidirectionalEdge(const int &node1, const int &node2, do
     return false;
 }
 
-// functions for backtracking (T2.1)
+// Functions for backtracking (T2.1)
 
-void GraphInterface::backtrackTSP(Node* current_node, unsigned int current_index, double total_distance, vector<Node*>& current_path, double& best_distance, vector<Node*>& best_path) {
-
+void GraphInterface::backtrackTSP(Node* current_node, unsigned int current_index, double total_distance, std::vector<Node*>& current_path, double& best_distance, std::vector<Node*>& best_path) {
     current_node->setVisited(true);
     current_path[current_index - 1] = current_node;
 
     if (current_index == nodes.size()) { // reached all nodes
         current_node->setVisited(false);
-
         // see if there is an edge back to the start node
-        Edge* return_edge = nullptr;
         for (auto edge : current_node->getAdj()) {
             if (edge->getDest()->getIndex() == 0) {
-                return_edge = edge;
+                double return_edge_weight = edge->getWeight();
+                double total = total_distance + return_edge_weight;
+                if (total < best_distance) {
+                    best_distance = total;
+                    best_path = current_path;
+                }
                 break;
-            }
-        }
-
-        // if there is a return edge
-        if (return_edge) {
-            double return_edge_weight = return_edge->getWeight();
-            total_distance = total_distance + return_edge_weight;
-
-            if (total_distance < best_distance) {
-                best_distance = total_distance;
-                best_path = current_path;
             }
         }
         return;
     }
 
-    // explore the other nodes
     for (auto edge : current_node->getAdj()) {
         Node* next_node = edge->getDest();
-
         double edge_weight = edge->getWeight();
-        double sum_of_distances = total_distance + edge_weight;
-
-        if (!next_node->isVisited() && sum_of_distances < best_distance) {
-            backtrackTSP(next_node, current_index + 1, best_distance + edge->getWeight(), current_path, best_distance, best_path);
+        if (!next_node->isVisited() && total_distance + edge_weight < best_distance) {
+            backtrackTSP(next_node, current_index + 1, total_distance + edge_weight, current_path, best_distance, best_path);
         }
     }
 
-    current_node->setVisited(false);  // unmark current node
+    current_node->setVisited(false);
 }
 
-double GraphInterface::solveTSPBacktracking(vector<Node*>& path) {
-
-    vector<Node*> current_path(nodes.size());
-    double shortest_distance = DBL_MAX; // max value
+double GraphInterface::solveTSPBacktracking(std::vector<Node*>& path) {
+    std::vector<Node*> current_path(nodes.size());
+    double shortest_distance = DBL_MAX;
 
     for (auto node : nodes) {
         node->setVisited(false);
     }
 
-    // starts from the first node
     backtrackTSP(nodes[0], 1, 0.0, current_path, shortest_distance, path);
-
     return shortest_distance;
 }
 
-// functions for triangular approximation heuristic (T2.2)
+// Functions for triangular approximation heuristic (T2.2)
 
-// given in appendix A
 double GraphInterface::toRadians(double degrees) {
-    double result = degrees * M_PI / 180.0;
-    return result;
+    return degrees * M_PI / 180.0;
 }
 
-// given in appendix A
 double GraphInterface::haversine(double lat1, double lon1, double lat2, double lon2) {
     double earth_radius = 6371000; // meters
 
@@ -144,27 +126,21 @@ double GraphInterface::haversine(double lat1, double lon1, double lat2, double l
     return earth_radius * c;
 }
 
-double GraphInterface::triangularApproximationHeuristic(vector<Node*>& path) {
+double GraphInterface::triangularApproximationHeuristic(std::vector<Node*>& path) {
     double approx_distance = 0.0;
 
     Node* current_node = findNode(0);
-    Node* start_node = current_node;
-
     current_node->setVisited(true);
+    path.push_back(current_node);
 
-    path.push_back(current_node); // keep track of visited nodes
-
-    // visit the others
     while (path.size() < nodes.size()) {
         double min_distance = DBL_MAX;
         Node* next_node = nullptr;
 
         for (auto edge : current_node->getAdj()) {
             Node* neighbor_node = edge->getDest();
-
             if (!neighbor_node->isVisited()) {
                 double distance = edge->getWeight();
-
                 if (distance < min_distance) {
                     min_distance = distance;
                     next_node = neighbor_node;
@@ -177,12 +153,15 @@ double GraphInterface::triangularApproximationHeuristic(vector<Node*>& path) {
             next_node->setVisited(true);
             path.push_back(next_node);
             current_node = next_node;
+        } else {
+            break;
         }
-        else {
-            // when there are no unvisited neighbors
-            approx_distance += haversine(current_node->getLatitude(), current_node->getLongitude(),
-                                         start_node->getLatitude(), start_node->getLongitude());
-            path.push_back(start_node); // return to start node
+    }
+
+    for (auto edge : current_node->getAdj()) {
+        if (edge->getDest()->getIndex() == 0) {
+            approx_distance += edge->getWeight();
+            path.push_back(findNode(0));
             break;
         }
     }
@@ -190,12 +169,11 @@ double GraphInterface::triangularApproximationHeuristic(vector<Node*>& path) {
     return approx_distance;
 }
 
-// task 4.3
+// Functions for nearest neighbor heuristic (T2.3)
 
-double GraphInterface::nearestNeighborHeuristic(vector<Node*>& path) {
-
+double GraphInterface::nearestNeighborHeuristic(std::vector<Node*>& path) {
     double total_distance = 0.0;
-    vector<bool> visited(nodes.size(), false);
+    std::vector<bool> visited(nodes.size(), false);
 
     Node* current_node = nodes[0];
     path.push_back(current_node);
@@ -205,11 +183,10 @@ double GraphInterface::nearestNeighborHeuristic(vector<Node*>& path) {
         Node* next_node = nullptr;
         double shortest_distance = DBL_MAX;
 
-        for (Node* neighbor : nodes) {
-
+        for (auto edge : current_node->getAdj()) {
+            Node* neighbor = edge->getDest();
             if (!visited[neighbor->getIndex()]) {
-                double dist = haversine(current_node->getLatitude(), current_node->getLongitude(), neighbor->getLatitude(), neighbor->getLongitude());
-
+                double dist = edge->getWeight();
                 if (dist < shortest_distance) {
                     shortest_distance = dist;
                     next_node = neighbor;
@@ -222,6 +199,8 @@ double GraphInterface::nearestNeighborHeuristic(vector<Node*>& path) {
             current_node = next_node;
             path.push_back(current_node);
             visited[current_node->getIndex()] = true;
+        } else {
+            break;
         }
     }
 
@@ -233,22 +212,21 @@ double GraphInterface::nearestNeighborHeuristic(vector<Node*>& path) {
     return total_distance;
 }
 
-double GraphInterface::twoOptOptimization(vector<Node*>& path, double current_distance) {
+double GraphInterface::twoOptOptimization(std::vector<Node*>& path, double current_distance) {
     bool improvement = true;
 
     while (improvement) {
         improvement = false;
         for (size_t i = 1; i < path.size() - 2; i++) {
             for (size_t j = i + 1; j < path.size() - 1; j++) {
-
                 double new_distance = current_distance -
-                                 haversine(path[i-1]->getLatitude(), path[i-1]->getLongitude(), path[i]->getLatitude(), path[i]->getLongitude()) -
-                                 haversine(path[j]->getLatitude(), path[j]->getLongitude(), path[j+1]->getLatitude(), path[j+1]->getLongitude()) +
-                                 haversine(path[i-1]->getLatitude(), path[i-1]->getLongitude(), path[j]->getLatitude(), path[j]->getLongitude()) +
-                                 haversine(path[i]->getLatitude(), path[i]->getLongitude(), path[j+1]->getLatitude(), path[j+1]->getLongitude());
+                                      haversine(path[i-1]->getLatitude(), path[i-1]->getLongitude(), path[i]->getLatitude(), path[i]->getLongitude()) -
+                                      haversine(path[j]->getLatitude(), path[j]->getLongitude(), path[j+1]->getLatitude(), path[j+1]->getLongitude()) +
+                                      haversine(path[i-1]->getLatitude(), path[i-1]->getLongitude(), path[j]->getLatitude(), path[j]->getLongitude()) +
+                                      haversine(path[i]->getLatitude(), path[i]->getLongitude(), path[j+1]->getLatitude(), path[j+1]->getLongitude());
 
                 if (new_distance < current_distance) {
-                    reverse(path.begin() + i, path.begin() + j + 1);
+                    std::reverse(path.begin() + i, path.begin() + j + 1);
                     current_distance = new_distance;
                     improvement = true;
                 }
@@ -258,4 +236,3 @@ double GraphInterface::twoOptOptimization(vector<Node*>& path, double current_di
 
     return current_distance;
 }
-

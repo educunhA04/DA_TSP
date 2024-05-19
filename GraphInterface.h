@@ -1,32 +1,30 @@
-#ifndef DA_TSP_GRAPHINTERFACE_H
-#define DA_TSP_GRAPHINTERFACE_H
+#ifndef GRAPHINTERFACE_H
+#define GRAPHINTERFACE_H
+
 #include "Graph.h"
+#include <vector>
 
 class GraphInterface {
 public:
-    // Graph Operations
-    Node *findNode(int index);
-    bool addNode(const int &index, double latitude = 0, double longitude = 0);
-    bool addBidirectionalEdge(const int &node1, const int &node2, double w);
-    Node *getNode(const int &index);
-    std::vector<Node *> getNodes();
+    Node* findNode(int index);
+    Node* getNode(const int& index);
+    std::vector<Node*> getNodes();
     void clearAllNodes();
+    bool addNode(const int& index, double latitude = 0, double longitude = 0);
+    bool addBidirectionalEdge(const int& node1, const int& node2, double w);
 
-// algorithms
-    double solveTSPBacktracking(vector<Node*>& path);
-
-    double triangularApproximationHeuristic(vector<Node*>& path);
-
-    double nearestNeighborHeuristic(vector<Node*>& path);
-    double twoOptOptimization(vector<Node*>& path, double current_distance);
+    // Algorithms
+    double solveTSPBacktracking(std::vector<Node*>& path);
+    double triangularApproximationHeuristic(std::vector<Node*>& path);
+    double nearestNeighborHeuristic(std::vector<Node*>& path);
+    double twoOptOptimization(std::vector<Node*>& path, double current_distance);
 
 private:
-    vector<Node*> nodes;
+    std::vector<Node*> nodes;
 
-    void backtrackTSP(Node* current_node, unsigned int level, double total_distance, vector<Node*>& current_path, double& best_distance, vector<Node*>& best_path);
-
+    void backtrackTSP(Node* current_node, unsigned int current_index, double total_distance, std::vector<Node*>& current_path, double& best_distance, std::vector<Node*>& best_path);
     double toRadians(double degrees);
     double haversine(double lat1, double lon1, double lat2, double lon2);
 };
 
-#endif // DA_TSP_GRAPHINTERFACE_H
+#endif // GRAPHINTERFACE_H
