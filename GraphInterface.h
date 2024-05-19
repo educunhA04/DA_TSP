@@ -14,10 +14,16 @@ public:
 
 // algorithms
     double solveTSPBacktracking(vector<Node*>& path);
+    double triangularApproximationHeuristic(vector<Node*>& path);
+
 
 private:
     vector<Node*> nodes;
+
     void backtrackTSP(Node* current_node, unsigned int level, double total_distance, vector<Node*>& current_path, double& best_distance, vector<Node*>& best_path);
+
+    double toRadians(double degrees);
+    double haversine(double lat1, double lon1, double lat2, double lon2);
 };
 
 #endif // DA_TSP_GRAPHINTERFACE_H

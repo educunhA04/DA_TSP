@@ -52,9 +52,8 @@ bool GraphInterface::addBidirectionalEdge(const int &node1, const int &node2, do
     return false;
 }
 
-// algorithms
+// functions for backtracking (T2.1)
 
-// Backtracking helper function
 void GraphInterface::backtrackTSP(Node* current_node, unsigned int current_index, double total_distance, vector<Node*>& current_path, double& best_distance, vector<Node*>& best_path) {
 
     current_node->setVisited(true);
@@ -100,7 +99,6 @@ void GraphInterface::backtrackTSP(Node* current_node, unsigned int current_index
     current_node->setVisited(false);  // unmark current node
 }
 
-// TSP Backtracking function
 double GraphInterface::solveTSPBacktracking(vector<Node*>& path) {
 
     vector<Node*> current_path(nodes.size());
@@ -114,4 +112,33 @@ double GraphInterface::solveTSPBacktracking(vector<Node*>& path) {
     backtrackTSP(nodes[0], 1, 0.0, current_path, shortest_distance, path);
 
     return shortest_distance;
+}
+
+// functions for triangular approximation heuristic (T2.2)
+
+// given in appendix A
+double GraphInterface::toRadians(double degrees) {
+    double result = degrees * M_PI / 180.0;
+    return result;
+}
+
+// given in appendix A
+double GraphInterface::haversine(double lat1, double lon1, double lat2, double lon2) {
+    double earth_radius = 6371000; // meters
+
+    double rad_lat1 = toRadians(lat1);
+    double rad_lon1 = toRadians(lon1);
+    double rad_lat2 = toRadians(lat2);
+    double rad_lon2 = toRadians(lon2);
+
+    double delta_lat = rad_lat2 - rad_lat1;
+    double delta_lon = rad_lon2 - rad_lon1;
+
+    double aux = sin(delta_lat / 2) * sin(delta_lat / 2) +
+                 cos(rad_lat1) * cos(rad_lat2) *
+                 sin(delta_lon / 2) * sin(delta_lon / 2);
+
+    double c = 2.0 * atan2(sqrt(aux), sqrt(1.0 - aux));
+
+    return earth_radius * c;
 }
