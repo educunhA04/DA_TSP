@@ -142,3 +142,49 @@ double GraphInterface::haversine(double lat1, double lon1, double lat2, double l
 
     return earth_radius * c;
 }
+
+double GraphInterface::triangularApproximationHeuristic(vector<Node*>& path) {
+    double approx_distance = 0.0;
+
+    Node* current_node = findNode(0);
+    Node* start_node = current_node;
+
+    current_node->setVisited(true);
+
+    path.push_back(current_node); // keep track of visited nodes
+
+    // visit the others
+    while (path.size() < nodes.size()) {
+        double min_distance = DBL_MAX;
+        Node* next_node = nullptr;
+
+        for (auto edge : current_node->getAdj()) {
+            Node* neighbor_node = edge->getDest();
+
+            if (!neighbor_node->isVisited()) {
+                double distance = edge->getWeight();
+
+                if (distance < min_distance) {
+                    min_distance = distance;
+                    next_node = neighbor_node;
+                }
+            }
+        }
+
+        if (next_node != nullptr) {
+            approx_distance += min_distance;
+            next_node->setVisited(true);
+            path.push_back(next_node);
+            current_node = next_node;
+        }
+        else {
+            // when there are no unvisited neighbors
+            approx_distance += haversine(current_node->getLatitude(), current_node->getLongitude(),
+                                         start_node->getLatitude(), start_node->getLongitude());
+            path.push_back(start_node); // return to start node
+            break;
+        }
+    }
+
+    return approx_distance;
+}
