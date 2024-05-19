@@ -1,8 +1,8 @@
 #ifndef GRAPHINTERFACE_H
 #define GRAPHINTERFACE_H
 
-#include "Graph.h"
 #include <vector>
+#include "Graph.h"
 
 class GraphInterface {
 public:
@@ -21,7 +21,6 @@ public:
 
 private:
     std::vector<Node*> nodes;
-
     void backtrackTSP(Node* current_node, unsigned int current_index, double total_distance, std::vector<Node*>& current_path, double& best_distance, std::vector<Node*>& best_path);
     double toRadians(double degrees);
     double haversine(double lat1, double lon1, double lat2, double lon2);

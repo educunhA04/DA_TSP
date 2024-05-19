@@ -3,6 +3,7 @@
 #include <cmath>
 #include <algorithm>
 
+// Find a node by its index
 Node* GraphInterface::findNode(int index) {
     for (auto v : nodes) {
         if (v->getIndex() == index) {
@@ -12,14 +13,17 @@ Node* GraphInterface::findNode(int index) {
     return nullptr;
 }
 
+// Get a node by its index
 Node* GraphInterface::getNode(const int& index) {
     return findNode(index);
 }
 
+// Get all nodes
 std::vector<Node*> GraphInterface::getNodes() {
     return nodes;
 }
 
+// Clear all nodes
 void GraphInterface::clearAllNodes() {
     for (auto& node : nodes) {
         node->setPath(nullptr);
@@ -35,6 +39,7 @@ void GraphInterface::clearAllNodes() {
     }
 }
 
+// Add a node
 bool GraphInterface::addNode(const int& index, double latitude, double longitude) {
     if (findNode(index) == nullptr) {
         nodes.push_back(new Node(index, latitude, longitude));
@@ -43,6 +48,7 @@ bool GraphInterface::addNode(const int& index, double latitude, double longitude
     return false;
 }
 
+// Add a bidirectional edge
 bool GraphInterface::addBidirectionalEdge(const int& node1, const int& node2, double w) {
     Node* n1 = findNode(node1);
     Node* n2 = findNode(node2);
@@ -54,8 +60,7 @@ bool GraphInterface::addBidirectionalEdge(const int& node1, const int& node2, do
     return false;
 }
 
-// Functions for backtracking (T2.1)
-
+// Backtracking algorithm for TSP
 void GraphInterface::backtrackTSP(Node* current_node, unsigned int current_index, double total_distance, std::vector<Node*>& current_path, double& best_distance, std::vector<Node*>& best_path) {
     current_node->setVisited(true);
     current_path[current_index - 1] = current_node;
@@ -88,6 +93,7 @@ void GraphInterface::backtrackTSP(Node* current_node, unsigned int current_index
     current_node->setVisited(false);
 }
 
+// Solve TSP using backtracking
 double GraphInterface::solveTSPBacktracking(std::vector<Node*>& path) {
     std::vector<Node*> current_path(nodes.size());
     double shortest_distance = DBL_MAX;
@@ -100,12 +106,12 @@ double GraphInterface::solveTSPBacktracking(std::vector<Node*>& path) {
     return shortest_distance;
 }
 
-// Functions for triangular approximation heuristic (T2.2)
-
+// Convert degrees to radians
 double GraphInterface::toRadians(double degrees) {
     return degrees * M_PI / 180.0;
 }
 
+// Haversine formula to calculate distance between two points
 double GraphInterface::haversine(double lat1, double lon1, double lat2, double lon2) {
     double earth_radius = 6371000; // meters
 
@@ -126,6 +132,7 @@ double GraphInterface::haversine(double lat1, double lon1, double lat2, double l
     return earth_radius * c;
 }
 
+// Triangular approximation heuristic for TSP
 double GraphInterface::triangularApproximationHeuristic(std::vector<Node*>& path) {
     double approx_distance = 0.0;
 
@@ -169,8 +176,7 @@ double GraphInterface::triangularApproximationHeuristic(std::vector<Node*>& path
     return approx_distance;
 }
 
-// Functions for nearest neighbor heuristic (T2.3)
-
+// Nearest neighbor heuristic for TSP
 double GraphInterface::nearestNeighborHeuristic(std::vector<Node*>& path) {
     double total_distance = 0.0;
     std::vector<bool> visited(nodes.size(), false);
@@ -212,6 +218,7 @@ double GraphInterface::nearestNeighborHeuristic(std::vector<Node*>& path) {
     return total_distance;
 }
 
+// 2-opt optimization to improve the initial tour
 double GraphInterface::twoOptOptimization(std::vector<Node*>& path, double current_distance) {
     bool improvement = true;
 
